@@ -357,9 +357,11 @@ void    TaskScheduler::AddTaskSetToPipe( ITaskSet* pTaskSet )
     // divide task up and add to pipe
     pTaskSet->m_RangeToRun = pTaskSet->m_SetSize / m_NumPartitions;
     if( pTaskSet->m_RangeToRun < pTaskSet->m_MinRange ) { pTaskSet->m_RangeToRun = pTaskSet->m_MinRange; }
+    if( pTaskSet->m_RangeToRun > pTaskSet->m_MaxRange ) { pTaskSet->m_RangeToRun = pTaskSet->m_MaxRange; }
 
     uint32_t rangeToSplit = pTaskSet->m_SetSize / m_NumInitialPartitions;
     if( rangeToSplit < pTaskSet->m_MinRange ) { rangeToSplit = pTaskSet->m_MinRange; }
+    if( rangeToSplit > pTaskSet->m_MaxRange ) { rangeToSplit = pTaskSet->m_MaxRange; }
 
     SubTaskSet subTask;
     subTask.pTask = pTaskSet;

@@ -75,18 +75,28 @@ namespace enki
         ITaskSet()
             : m_SetSize(1)
             , m_MinRange(1)
+            , m_MaxRange(std::numeric_limits<uint32_t>::max())
             , m_RangeToRun(1)
         {}
 
         ITaskSet( uint32_t setSize_ )
             : m_SetSize( setSize_ )
             , m_MinRange(1)
+            , m_MaxRange(std::numeric_limits<uint32_t>::max())
             , m_RangeToRun(1)
         {}
 
         ITaskSet( uint32_t setSize_, uint32_t minRange_ )
             : m_SetSize( setSize_ )
             , m_MinRange( minRange_ )
+            , m_MaxRange(std::numeric_limits<uint32_t>::max())
+            , m_RangeToRun(minRange_)
+        {}
+
+        ITaskSet( uint32_t setSize_, uint32_t minRange_, uint32_t maxRange)
+            : m_SetSize( setSize_ )
+            , m_MinRange( minRange_ )
+            , m_MaxRange(std::numeric_limits<uint32_t>::max())
             , m_RangeToRun(minRange_)
         {}
 
@@ -108,6 +118,8 @@ namespace enki
         // of m_MinRange.
         // Also known as grain size in literature.
         uint32_t                m_MinRange;
+
+        uint32_t                m_MaxRange;
 
     private:
         friend class           TaskScheduler;
