@@ -93,10 +93,10 @@ namespace enki
             , m_RangeToRun(minRange_)
         {}
 
-        ITaskSet( uint32_t setSize_, uint32_t minRange_, uint32_t maxRange)
+        ITaskSet( uint32_t setSize_, uint32_t minRange_, uint32_t maxRange_)
             : m_SetSize( setSize_ )
             , m_MinRange( minRange_ )
-            , m_MaxRange(std::numeric_limits<uint32_t>::max())
+            , m_MaxRange( maxRange_ )
             , m_RangeToRun(minRange_)
         {}
 
@@ -151,6 +151,7 @@ namespace enki
         TaskSet() = default;
         TaskSet( TaskSetFunction func_ ) : m_Function( func_ ) {}
         TaskSet( uint32_t setSize_, TaskSetFunction func_ ) : ITaskSet( setSize_ ), m_Function( func_ ) {}
+        TaskSet( uint32_t setSize_, uint32_t minRange_, uint32_t maxRange_, TaskSetFunction func_) : ITaskSet(setSize_, minRange_, maxRange_), m_Function(func_) {}
 
 
         virtual void            ExecuteRange( TaskSetPartition range, uint32_t threadnum  )
